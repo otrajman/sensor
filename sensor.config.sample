@@ -1,0 +1,6 @@
+{
+  "api_key": "mailjet api key",
+  "api_secret": "mailjet api secret",
+  "From": { "Email": "valid mailjet sending from email", "Name": "You name" },
+  "To": [ { "Email", "valid email", "Name": "to name"} ],
+}
