@@ -40,18 +40,19 @@ for i in range(measurements):
 
   distance = pulse_duration * 17150
   distance = round(distance, 2)
-  print("Distance",i + 1,":",distance,"cm")
+  print('Distance',i + 1,':',distance,'cm')
   accum += distance
 
   GPIO.cleanup()
 
-print("Avg Distance:",round(accum/measurements, 2),"cm")
+print('Avg Distance:',round(accum/measurements, 2),'cm')
 
 if args.test or not args.config: sys.exit()
 
-from mailjet_rest import Client
-
 config = json.loads(open(args.config, 'r').read()) 
+
+from mailjet_rest import Client
+import os
 
 api_key = config['api_key'] 
 api_secret = config['api_secret']
@@ -63,14 +64,15 @@ print("Sending To", config['To'])
 data = {
   'Messages': [
     {
-      "From": config['From'],
-      "To": config['To'],
-      "Subject": "Tree water level",
-      "TextPart": 'Approximate water remaining: ' + str(round(30 - distance,2)) + ' cm',
+      'From': config['From'],
+      'To': config['To'],
+      'Subject': 'Tree water level',
+      'TextPart': 'Approximate water remaining: ' + str(round(30 - distance,2)) + ' cm',
     }
   ]
 }
 
+print ('Data', data)
 result = mailjet.send.create(data=data)
 print(result.status_code)
 print(result.json())
