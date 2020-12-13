@@ -67,7 +67,7 @@ data = {
       'From': config['From'],
       'To': config['To'],
       'Subject': 'Tree water level',
-      'TextPart': 'Approximate water remaining: ' + str(round(30 - distance,2)) + ' cm',
+      'TextPart': 'Approximate water remaining: ' + str(round(config['height'] - distance,2)) + ' cm',
     }
   ]
 }
